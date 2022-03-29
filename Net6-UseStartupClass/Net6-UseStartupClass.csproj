@@ -10,6 +10,19 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+	<!-- 
+          Seq is a nice option for easy-to-use logging in small to medium projects.
+          For details see https://docs.datalust.co/docs. 
+		  For install instructions see https://docs.datalust.co/docs/getting-started.
+      
+          In real-world projects, consider more advanced monitoring platforms like
+          https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core or 
+		  https://github.com/prometheus-net/prometheus-net (particularly interesting with K8s).
+      -->
+    <PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
