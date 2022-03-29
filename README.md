@@ -4,14 +4,16 @@
 
 ### Comparing the Problem & ProblemDetails Results
 
-### Configuring [Serilog](https://github.com/serilog/serilog-settings-configuration)
-> [Sinks](https://github.com/serilog/serilog/wiki/Provided-Sinks)
-> 1. Console
-> 1. File
-> 1. Seq
+### Setting up [Serilog](https://serilog.net/)
+* [Serilog Aspnetcore](https://github.com/serilog/serilog-aspnetcore)
+* [Two Stage Initialization](https://github.com/serilog/serilog-aspnetcore#two-stage-initialization)
+* [Serilog Settings Configurations](https://github.com/serilog/serilog-settings-configuration)
+* [Serilog Sinks](https://github.com/serilog/serilog/wiki/Provided-Sinks)
+    1. Console
+    1. File
+    1. Seq
 
-
-### Setting up Seq
+### Setting up [Seq](https://datalust.co/seq)
 ```
 docker pull datalust/seq
 

@@ -46,6 +46,8 @@ namespace Net6_UseStartupClass.Controllers
                 new("Age", "Must be great or equals to 18.")
             });
 
+            _logger.LogInformation("{@ProblemDetails}", pd);
+
             return new ObjectResult(pd) { StatusCode = pd.Status };
         }
 

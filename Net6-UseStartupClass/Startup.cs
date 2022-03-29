@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Serilog;
 
 namespace Net6_UseStartupClass
 {
@@ -33,6 +34,13 @@ namespace Net6_UseStartupClass
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseSerilogRequestLogging(); // <-- Add this line
+
+            //app.UseSerilogRequestLogging(options =>
+            //{
+            //    options.MessageTemplate = "Serilog Sample: HTTP {RequestMethod} {RequestPath} ({UserId}) responded {StatusCode} in {Elapsed:0.0000}ms";
+            //});
 
             app.UseRouting();
             app.UseHttpsRedirection();
