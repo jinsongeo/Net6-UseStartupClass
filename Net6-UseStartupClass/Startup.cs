@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Net6_UseStartupClass.Code;
 using Serilog;
 
 namespace Net6_UseStartupClass
@@ -14,6 +15,15 @@ namespace Net6_UseStartupClass
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Changes to the JSON configuration file after the app has started are not read.
+            // To read changes after the app has started, use IOptionsSnapshot.
+            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0#options-interfaces
+            services.Configure<AppSettings>(Configuration.GetSection(AppSettings.Key));
+
+            // Can use this Approach for Option Validations
+            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0#options-validation
+            services.AddOptions<TokenSettings>().Bind(Configuration.GetSection(TokenSettings.Key));
+
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

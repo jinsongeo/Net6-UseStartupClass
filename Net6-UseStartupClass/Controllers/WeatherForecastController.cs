@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Net6_UseStartupClass.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -22,6 +23,11 @@ namespace Net6_UseStartupClass.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            var req = HttpContext.Request.GetDisplayUrl();
+            var segments = new Uri(req).Segments;
+
+            _logger.LogInformation("The URL Segments {@URLSegments}", segments.ToList());
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
