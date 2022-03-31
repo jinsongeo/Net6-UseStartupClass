@@ -20,7 +20,7 @@ docker pull datalust/seq
 docker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -p 5341:80 datalust/seq:latest
 ```
 
-### [Configurations - Options pattern](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0#options-interfaces) in ASP.NET Core
+### Configurations - [Options pattern](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0#options-interfaces) in ASP.NET Core
 
 Configuration -> GetSection -> Bind
 ```
