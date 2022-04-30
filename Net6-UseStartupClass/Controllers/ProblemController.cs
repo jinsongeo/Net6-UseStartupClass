@@ -33,7 +33,7 @@ namespace Net6_UseStartupClass.Controllers
             {
                 Detail = "The request parameters failed to validate.",
                 Instance = null,
-                Status = 400,
+                Status = (int)System.Net.HttpStatusCode.BadRequest,
                 Title = "Validation Error",
                 Type = "https://www.example.net/validation-error",
             };

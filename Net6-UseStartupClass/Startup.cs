@@ -1,5 +1,9 @@
 ﻿using Autofac;
 using Net6_UseStartupClass.Code;
+using Net6_UseStartupClass.Code.JsonSerializer;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using Serilog;
 
 namespace Net6_UseStartupClass
@@ -24,7 +28,28 @@ namespace Net6_UseStartupClass
             // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0#options-validation
             services.AddOptions<TokenSettings>().Bind(Configuration.GetSection(TokenSettings.Key));
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                    {
+                        options.SerializerSettings.ContractResolver = new DefaultContractResolver()
+                        {
+                            // Resolves UserName => user_name
+                            NamingStrategy = new SnakeCaseNamingStrategy()
+                        };
+                        // options.SerializerSettings.StringEscapeHandling = StringEscapeHandling.EscapeHtml;
+                        options.SerializerSettings.TypeNameHandling = TypeNameHandling.None;
+
+                        // Note: Need to disable DateParseHandling because if in api we receive string that looks like date,
+                        // json.net by default automatically converts it to date and field becomes modified, iso date is converted to another format
+                        options.SerializerSettings.DateParseHandling = DateParseHandling.None;
+                        options.SerializerSettings.MetadataPropertyHandling = MetadataPropertyHandling.Ignore;
+
+                        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+
+                        //Configure the API Json Serializer
+                        ApiJsonSerializer.Configure(options.SerializerSettings);
+                    });
+
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
         }
@@ -34,6 +59,8 @@ namespace Net6_UseStartupClass
         {
             // Sample
             // builder.RegisterType<MultiTenantResolver>().As<ITenantResolver>().InstancePerLifetimeScope();
+
+            builder.RegisterType<ApiJsonSerializer>().As<IApiJsonSerializer>().SingleInstance();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

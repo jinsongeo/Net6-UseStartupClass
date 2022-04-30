@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Net6_UseStartupClass.Code;
 
@@ -11,7 +10,7 @@ namespace Net6_UseStartupClass.Controllers
     {
         private readonly IConfiguration _configuration;
         public AppSettings? _appSettingsOptions { get; private set; }
-        public TokenSettings? _tokenOptions { get; private set; }
+        public TokenSettings? _tokenOptions { get; private set; }      
 
         public ConfigsController(IConfiguration configuration, IOptions<AppSettings> appSettingsOptions, IOptions<TokenSettings> tokenOptions)
         {
